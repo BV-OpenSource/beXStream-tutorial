@@ -1,0 +1,12 @@
+<h3>Drones List</h3>
+<hr><hr>
+
+<div *ngFor="let asset of assets">
+  <h5>{{ asset.name }}</h5>
+  <p>{{ asset.drone.id }}</p>
+  <p *ngIf="asset.drone.latitude">Latitude: {{ asset.drone.latitude }}, Longitude: {{ asset.drone.longitude }}</p>
+  <p *ngIf="asset.drone.onMission">On Mission</p>
+  <p *ngIf="!asset.drone.onMission">Not on Mission</p>
+  <p>Last Connected: {{asset.lastConnected}}</p>
+  <hr>
+</div>

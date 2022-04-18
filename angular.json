@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tutorial-I-login-bexstream"
+    }
+  },
+  "defaultProject": "tutorial-I-login-bexstream",
+  "cli": {
+    "analytics": "2d1c2177-0eee-4a92-92b4-11d390797773"
+  }
 }

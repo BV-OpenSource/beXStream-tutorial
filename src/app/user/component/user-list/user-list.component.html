@@ -1,0 +1,88 @@
+<h3>Users List</h3>
+<table border="1">
+  <thead>
+  <th>Name</th>
+  <th>Description</th>
+  <th>Role</th>
+  <th>Actions</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td>{{ user.username }}</td>
+    <td>{{ user.description }}</td>
+    <td>{{ user.roles[0].name }}</td>
+    <td>
+      <button (click)="editUser(user)">Edit</button>
+      <button (click)="deleteUser(user)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<hr>
+<hr>
+
+<h3>Edit User</h3>
+<form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
+  <div>
+    <label for="username">
+      Username
+    </label>
+    <input id="username" type="text" formControlName="username">
+  </div>
+
+  <div>
+    <label for="description">
+      Description
+    </label>
+    <input id="description" type="text" formControlName="description">
+  </div>
+
+  <div>
+    <label for="password">
+      Password
+    </label>
+    <input id="password" type="password" formControlName="password">
+  </div>
+
+  <button class="button" type="submit">Update</button>
+
+</form>
+
+<hr>
+<hr>
+
+<h3>Create User</h3>
+<form [formGroup]="createUserForm" (ngSubmit)="createUser()">
+
+  <div>
+    <label for="username">
+      Username
+    </label>
+    <input id="username" type="text" formControlName="username">
+  </div>
+
+  <div>
+    <label for="description">
+      Description
+    </label>
+    <input id="description" type="text" formControlName="description">
+  </div>
+
+  <div>
+    <label for="email">
+      E-mail
+    </label>
+    <input id="e-mail" type="text" formControlName="email">
+  </div>
+
+  <div>
+    <label for="password">
+      Password
+    </label>
+    <input id="password" type="password" formControlName="password">
+  </div>
+
+  <button class="button" type="submit">Create</button>
+
+</form>
