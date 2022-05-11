@@ -15,13 +15,10 @@ export class AssetService {
 
 
   backendUrl = 'https://bexstream.beyond-vision.pt/api/v1/asset';
-  // backendUrl = 'https://beyond-skyline-backend.preprod.pdmfc.com/api/v1/asset';
-  // backendUrl = 'https://demo.aeriya.tech/api/v1/asset';
   getAllDronesUrl = this.backendUrl + '/all/drone';
   getConfigUrl = this.backendUrl + '/config';
 
   config: SocketIoConfig = {
-    // url: 'https://beyond-skyline-backend.preprod.pdmfc.com',
     url: 'https://bexstream.beyond-vision.pt',
     options: {
       query: {
