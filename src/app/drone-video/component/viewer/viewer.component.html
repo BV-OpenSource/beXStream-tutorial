@@ -1,0 +1,6 @@
+<h2>Welcome to the Drone Video Player</h2>
+<div *ngIf="hasStream">
+  <!-- video stream -->
+  <app-video-stream></app-video-stream>
+</div>
+<p *ngIf="!hasStream">Looking for a drone with an active stream. If this take too long, check your simulation/video-stream and trying refreshing this page.</p>

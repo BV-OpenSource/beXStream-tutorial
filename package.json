@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~10.2.4",
     "@angular/router": "~10.2.4",
     "ngx-socket-io": "^4.2.0",
+    "janus-gateway-js": "^2.0.2",
     "ngx-webstorage-service": "^4.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

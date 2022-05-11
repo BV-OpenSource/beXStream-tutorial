@@ -1,4 +1,5 @@
 import { Drone } from "./drone";
+import { Stream } from "./stream";
 
 export class Asset {
 
@@ -12,10 +13,12 @@ export class Asset {
     isDirectConnect?: boolean; // usually via telemetry
     missionCount?: number | null;
 
+    stream?: Stream;
+
     constructor(type: string) {
         if (type === 'Drone') {
-            this.drone = new Drone();
-        } 
+          this.drone = new Drone();
+        }
         this.id = '';
         this.name = '';
         this.mountPoint = null;

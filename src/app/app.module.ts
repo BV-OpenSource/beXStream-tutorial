@@ -12,13 +12,17 @@ import { LoginComponent } from './login/login.component';
 import { BEXSTREAM_SERVICE_STORAGE, WebStorageService } from './lib/web-storage.service';
 import { DroneListComponent } from './drone/components/drone-list/drone-list.component';
 import { UserListComponent } from './user/component/user-list/user-list.component';
+import { ViewerComponent } from './drone-video/component/viewer/viewer.component';
+import { VideoStreamComponent } from './drone-video/component/video/video-stream/video-stream.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DroneListComponent,
-    UserListComponent
+    UserListComponent,
+    ViewerComponent,
+    VideoStreamComponent
   ],
   imports: [
     BrowserModule,
