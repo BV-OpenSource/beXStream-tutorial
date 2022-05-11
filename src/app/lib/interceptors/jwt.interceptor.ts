@@ -17,13 +17,14 @@ export class JwtInterceptor implements HttpInterceptor {
     // add authorization header with jwt token if available
     const apiToken = this.webStorage.getStoredToken();
     if (apiToken) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${apiToken}`
-        }
-      });
+        request = request.clone({
+            setHeaders: {
+                Authorization: `Bearer ${apiToken}`,
+                // 'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Headers': 'Content-Type',
+            }
+        });
     }
-
     return next.handle(request);
   }
 }

@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LOCAL_STORAGE } from 'ngx-webstorage-service';
-import { JwtInterceptor } from './lib/interceptors/jwt.interceptor';
+import {JwtInterceptor} from './lib/interceptors/jwt.interceptor';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

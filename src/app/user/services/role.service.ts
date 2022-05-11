@@ -16,12 +16,12 @@ export class RoleService {
 
   public getAll(): Observable<Role[]> {
     const params = new HttpParams()
-      .set('filter', '')
-      .set('limit', '0')
-      .set('offset', '')
-      .set('sort', '')
-      .set('order', '');
+            .set('filter', '')
+            .set('limit', '0')
+            .set('offset', '')
+            .set('sort', '')
+            .set('order', '');
 
-    return this.http.get<Role[]>(this.getAllUrl, {params});
+    return this.http.get<Role[]>(this.getAllUrl,  {params});
   }
 }

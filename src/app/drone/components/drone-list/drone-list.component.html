@@ -1,12 +1,43 @@
 <h3>Drones List</h3>
 <hr><hr>
-
 <div *ngFor="let asset of assets">
-  <h5>{{ asset.name }}</h5>
-  <p>{{ asset.drone.id }}</p>
-  <p *ngIf="asset.drone.latitude">Latitude: {{ asset.drone.latitude }}, Longitude: {{ asset.drone.longitude }}</p>
-  <p *ngIf="asset.drone.onMission">On Mission</p>
-  <p *ngIf="!asset.drone.onMission">Not on Mission</p>
-  <p>Last Connected: {{asset.lastConnected}}</p>
-  <hr>
+    <h5>{{ asset.name }}</h5>
+    <p>{{ asset.drone.id }}</p>
+    <p *ngIf="asset.drone.latitude">Latitude: {{ asset.drone.latitude }}, Longitude: {{ asset.drone.longitude }}</p>
+    <p *ngIf="asset.drone.onMission">On Mission</p>
+    <p *ngIf="!asset.drone.onMission">Not on Mission</p>
+    <p *ngIf="asset.isActive">Active</p>
+    <p>Last Connected: {{asset.lastConnected}}</p>
+    <p>
+        <button (click)="downloadConfig(asset.id)">
+            Download Config File
+        </button>
+    </p>
+    
+    <p *ngIf="asset.isActive && (!selectedAsset || asset.id !== selectedAsset.id)"><button (click)="selectAsset(asset)">Select Drone</button></p>
+
+    <p *ngIf="asset.isActive && selectedAsset && asset.id === selectedAsset.id">
+        <span><b>Latitude:</b> {{ asset.drone.md.position.latitude }}</span> <br>
+        <span><b>Longitude:</b> {{ asset.drone.md.position.longitude }}</span> <br>
+        <span><b>Altitude:</b> {{ asset.drone.md.position.altitude }}</span> <br>
+    </p>
+
+    <table *ngIf="asset.isActive && selectedAsset && asset.id === selectedAsset.id">
+        <tbody>
+            <tr>
+                <td *ngIf="selectedAsset.drone.flightStatus.isLanded"><button (click)="takeOffDrone()">TakeOff</button></td>
+                <td *ngIf="!selectedAsset.drone.flightStatus.isLanded"><button (click)="landDrone()">Land</button></td>
+            </tr>
+            <tr *ngIf="!selectedAsset.drone.flightStatus.isLanded">
+                <td><button (click)="moveDroneLeft()">Move Left</button></td>
+                <td><button (click)="moveDroneRight()">Move Right</button></td>
+                <td><button (click)="moveDroneForward()">Move Forward</button></td>
+                <td><button (click)="moveDroneBack()">Move Back</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    
+    <hr>
 </div>
+

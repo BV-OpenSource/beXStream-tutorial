@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router} from '@angular/router';
 
+
 import { User } from './models/user';
 import { WebStorageService } from '../lib/web-storage.service';
 
@@ -31,23 +32,23 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * User authentication
-   */
-  public authenticate(): void {
-    const loginFormValues = this.loginForm.value
+	 * User authentication
+	 */
+	public authenticate(): void {
+    const loginFormValues = this.loginForm.value;
     this.user.username = loginFormValues.username;
     this.user.password = loginFormValues.password;
+    
 
     this.http.post<any>('https://bexstream.beyond-vision.pt/api/v1/auth/user', this.user)
-      .subscribe((result) => {
-
-        if (result.user) {
+    .subscribe((result) => {
+				if (result.user) {
           alert(`${result.user.username} has benn successfully logged in!`);
           this.webStorage.storageToken(result.token);
           this.router.navigate([this.defaultURLRoute]);
-        } else {
+				} else {
           alert(`Error on login. Please check the username and the password!.`);
         }
-      });
-  }
+			});
+	}
 }

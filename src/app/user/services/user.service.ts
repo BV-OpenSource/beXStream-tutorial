@@ -15,11 +15,11 @@ export class UserService {
 
   public getAllUsers(paginator: PaginatorDto): Observable<User[]> {
     const params = new HttpParams()
-      .set('filter', paginator.filter)
-      .set('limit', paginator.limit.toString())
-      .set('offset', paginator.offset.toString())
-      .set('sort', paginator.sort)
-      .set('order', paginator.order);
+        .set('filter', paginator.filter)
+        .set('limit', paginator.limit.toString())
+        .set('offset', paginator.offset.toString())
+        .set('sort', paginator.sort)
+        .set('order', paginator.order);
 
     return this.http.get<User[]>(this.backendUserUrl, {params});
   }

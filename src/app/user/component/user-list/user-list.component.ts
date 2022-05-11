@@ -4,7 +4,7 @@ import { UserService } from '../../services/user.service';
 import { FormBuilder } from '@angular/forms';
 import { Role } from '../../models/role';
 import { User } from '../../models/user';
-import {RoleService} from "../../services/role.service";
+import { RoleService } from '../../services/role.service';
 
 @Component({
   selector: 'app-user-list',
@@ -30,27 +30,16 @@ export class UserListComponent implements OnInit {
     email: ''
   });
 
-
   editingUser: User = null;
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService,
-              private roleService: RoleService) { }
+    private userService: UserService,
+    private roleService: RoleService) { }
 
   ngOnInit(): void {
     this.paginator.limit = 0;
     this.listUsers();
     this.getAllRoles();
-  }
-
-
-  private listUsers() {
-    this.userService
-      .getAllUsers(this.paginator)
-      .subscribe((users) => {
-
-        this.users = users;
-      });
   }
 
   private getAllRoles() {
@@ -59,6 +48,14 @@ export class UserListComponent implements OnInit {
       .subscribe((roles) => {
         this.roles = roles;
       });
+  }
+
+  private listUsers() {
+    this.userService
+      .getAllUsers(this.paginator)
+      .subscribe((users) => {
+        this.users = users;
+      })
   }
 
   editUser(user: User) {
@@ -103,11 +100,11 @@ export class UserListComponent implements OnInit {
     newUser.email = createUserFormValues.email;
     newUser.roles = [this.roles[0]];
 
-
     this.userService
       .register(newUser)
       .subscribe((user) => {
         this.listUsers();
       });
   }
+
 }
