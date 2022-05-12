@@ -7,6 +7,7 @@ import { MissionDrone } from '../../models/missionDrone';
 import { Position } from '../../models/position';
 import { Velocity } from '../../models/velocity';
 import { AssetService } from '../../services/asset.service';
+import {JanusService} from "../../../lib/services/janus.service";
 
 @Component({
   selector: 'app-drone-list',
@@ -23,7 +24,8 @@ export class DroneListComponent implements OnInit, OnDestroy {
 
   DRONE_FE_MAX_SPEED = 3.0; // Drone Frontend Constant Default Value
 
-  constructor(private assetService: AssetService) { }
+  constructor(private assetService: AssetService,
+              private janusService: JanusService,) { }
 
   ngOnInit(): void {
     this.paginator.limit = 0;
@@ -42,7 +44,6 @@ export class DroneListComponent implements OnInit, OnDestroy {
     this.assetService
       .getAllDrones(this.paginator)
       .subscribe((assets: Asset[]) => {
-        console.log(assets);
         this.assets = assets;
       })
   }
@@ -67,6 +68,11 @@ export class DroneListComponent implements OnInit, OnDestroy {
   public selectAsset(selectedAsset: Asset) {
     this.selectedAsset = selectedAsset;
     this.selectedAsset.drone.md = new MissionDrone();
+    if(selectedAsset.stream) {
+      setTimeout( () => {
+        this.janusService.watchJanusStream(selectedAsset.stream.mountPoint)}, 1000);
+
+    }
 
     this.initSubscriptions();
   }
@@ -96,7 +102,6 @@ export class DroneListComponent implements OnInit, OnDestroy {
       }
     }));
 
-    console.log(this.subscriptions);
   }
 
   /**

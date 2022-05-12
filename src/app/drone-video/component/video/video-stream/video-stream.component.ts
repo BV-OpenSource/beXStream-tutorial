@@ -13,7 +13,6 @@ export class VideoStreamComponent implements AfterViewInit, OnDestroy {
   @ViewChild('videostream', { static: false, read: ElementRef }) videoElement: ElementRef<HTMLVideoElement> | undefined;
   ngAfterViewInit(): void {
     if (this.videoElement) {
-      console.log('Start Video Stream');
       this.janusService.createConnection(this.videoElement);
     }
   }

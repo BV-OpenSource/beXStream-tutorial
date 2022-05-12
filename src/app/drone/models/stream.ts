@@ -1,3 +1,3 @@
 export class Stream {
-  mountpoint: number;
+  mountPoint: number;
 }

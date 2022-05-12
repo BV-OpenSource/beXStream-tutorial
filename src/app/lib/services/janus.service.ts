@@ -6,7 +6,7 @@ import {ElementRef, Injectable} from '@angular/core';
 export class JanusService {
   // @ts-ignore
   Janus = require('janus-gateway-js');
-  janusPath = 'wss://beyond-skyline.com/janus';
+  janusPath = 'wss://bexstream.beyond-vision.pt/janus';
   janusClient: any;
   streaming: any;
   videoElement: ElementRef<HTMLVideoElement> | undefined;
@@ -19,6 +19,15 @@ export class JanusService {
     this.janusClient = new this.Janus.Client(this.janusPath, {
       debug: 'all',
       keepalive: 'true',
+      pc: {config: {
+          iceServers: [{
+            username: 'coturn',
+            credential: 'coturn',
+            urls: [ 'turn:213.63.138.90:3478?transport=udp',
+            ],
+          }]
+        },
+        iceTransportPolicy: 'relay', },
     });
   }
 
@@ -95,6 +104,7 @@ export class JanusService {
 
 
   watchJanusStream(streamID: number) {
+    console.log('asset ID', streamID);
       const callback = () => {
         //if (this.videoStopped) {
           console.log('Resuming video');

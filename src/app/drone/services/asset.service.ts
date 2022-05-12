@@ -75,6 +75,7 @@ export class AssetService {
 
   // Sends Take off
   public sendDroneTakeoff = (droneData: any) => {
+    console.log('this.socket',this.socket);
     this.socket?.emit('/frontend/takeoff', droneData);
   }
 
@@ -88,7 +89,7 @@ export class AssetService {
     this.socket?.emit('/frontend/cmd', droneData);
   }
 
-  
+
 
   // Returns STATE of Drone
   public getDroneState = (droneId: string): Observable<MavrosState> => {
