@@ -33,7 +33,7 @@ export class ViewerComponent implements OnInit {
             this.selectedDrone = asset;
             this.hasStream = true;
             setTimeout( () => {this.janusService.watchJanusStream(asset.stream.mountPoint)}, 1000);
-            // Nothing else to init, so we can just return here...
+            // Nothing else to init, so we can just break here...
             break;
           }
         }
