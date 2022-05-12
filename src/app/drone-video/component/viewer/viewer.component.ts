@@ -15,7 +15,6 @@ export class ViewerComponent implements OnInit {
   hasStream = false;
   selectedDrone: Asset;
 
-
   constructor(
     private assetService: AssetService,
     private janusService: JanusService,
@@ -30,17 +29,14 @@ export class ViewerComponent implements OnInit {
 
         for (let i = 0; i < assets.length; i++) {
           const asset = assets[i]
-          if(asset.stream && !asset.name.includes('SK')) {
+          if(asset.stream) {
             this.selectedDrone = asset;
             this.hasStream = true;
             setTimeout( () => {this.janusService.watchJanusStream(asset.stream.mountPoint)}, 1000);
             // Nothing else to init, so we can just return here...
             break;
           }
-
         }
-
       });
   }
-
 }

@@ -7,12 +7,12 @@ export class JanusService {
   // @ts-ignore
   Janus = require('janus-gateway-js');
   janusPath = 'wss://bexstream.beyond-vision.pt/janus';
-  janusClient: any;
-  streaming: any;
-  videoElement: ElementRef<HTMLVideoElement> | undefined;
-  connection: any;
-  videoStopped: boolean;
-  currentWatch: number | null;
+  janusClient: any; // Holds the Janus Client object, used to generate connections
+  streaming: any; // Streaming object
+  videoElement: ElementRef<HTMLVideoElement> | undefined; // DOM element to retain the stream
+  connection: any; // Holds the connection to Janus
+  videoStopped: boolean; // Used to maintain status of a video stream. You may want to change to an array if you want to have multiple streams
+  currentWatch: number | null; // Current streaming being watched
 
 
   constructor() {
@@ -48,11 +48,9 @@ export class JanusService {
   // creates a Janus session
   createConnection(videoViewer: ElementRef<HTMLVideoElement>) {
     this.videoElement = videoViewer;
-    console.log('Connnection', this.connection);
     if (!this.connection) {
       this.janusClient.createConnection().then((connection: any) => {
         this.connection = connection;
-        //this.reconnect = false;
         console.log('New connection', this.connection);
         this.connection.createSession().then((session: any) => {
           session.attachPlugin('janus.plugin.streaming').then((streaming: any) => {
@@ -102,23 +100,14 @@ export class JanusService {
     }
   }
 
-
+  // obtain the stream link, requested by the watch method
   watchJanusStream(streamID: number) {
-    console.log('asset ID', streamID);
       const callback = () => {
-        //if (this.videoStopped) {
-          console.log('Resuming video');
-          //this.videoStopped = false;
           this.streaming.watch(streamID).then( () => {
             this.currentWatch = streamID;
           }).catch((error: any) => {
             console.log('Janus:error: Attempt to watch', error);
           });
-        //} else {
-        //  console.log('Timeout');
-        //  setTimeout(callback, 50);
-        //}
-
       };
       setTimeout(callback, 50);
   }

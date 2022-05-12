@@ -10,9 +10,6 @@ export class Asset {
     drone?: Drone;
     lastConnected: Date | null;
 
-    isDirectConnect?: boolean; // usually via telemetry
-    missionCount?: number | null;
-
     stream?: Stream;
 
     constructor(type: string) {

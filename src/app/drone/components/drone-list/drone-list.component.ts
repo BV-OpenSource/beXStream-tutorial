@@ -7,7 +7,7 @@ import { MissionDrone } from '../../models/missionDrone';
 import { Position } from '../../models/position';
 import { Velocity } from '../../models/velocity';
 import { AssetService } from '../../services/asset.service';
-import {JanusService} from "../../../lib/services/janus.service";
+import { JanusService } from "../../../lib/services/janus.service";
 
 @Component({
   selector: 'app-drone-list',
@@ -73,7 +73,6 @@ export class DroneListComponent implements OnInit, OnDestroy {
         this.janusService.watchJanusStream(selectedAsset.stream.mountPoint)}, 1000);
 
     }
-
     this.initSubscriptions();
   }
 
