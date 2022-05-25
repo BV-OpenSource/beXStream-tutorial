@@ -37,11 +37,11 @@
               <tr *ngIf="!selectedAsset.drone.flightStatus.isLanded">
                   <td colspan="2" align="center"><button (click)="moveDroneForward()">Move Forward</button></td>
               </tr>
-              <tr>
+              <tr *ngIf="!selectedAsset.drone.flightStatus.isLanded">
                   <td><button (click)="moveDroneLeft()">Move Left</button></td>
                   <td><button (click)="moveDroneRight()">Move Right</button></td>
               </tr>
-              <tr>
+              <tr *ngIf="!selectedAsset.drone.flightStatus.isLanded">
                   <td colspan="2" align="center"><button (click)="moveDroneBack()">Move Back</button></td>
               </tr>
               <tr>
