@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://bexstream.beyond-vision.pt",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

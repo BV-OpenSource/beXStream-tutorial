@@ -14,7 +14,7 @@ import { MavrosState } from '../models/mavrosState';
 export class AssetService {
 
 
-  backendUrl = 'https://bexstream.beyond-vision.pt/api/v1/asset';
+  backendUrl = '/api/v1/asset';
   getAllDronesUrl = this.backendUrl + '/all/drone';
   getConfigUrl = this.backendUrl + '/config';
 

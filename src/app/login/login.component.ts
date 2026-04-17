@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     this.user.password = loginFormValues.password;
     
 
-    this.http.post<any>('https://bexstream.beyond-vision.pt/api/v1/auth/user', this.user)
+    this.http.post<any>('/api/v1/auth/user', this.user)
     .subscribe((result) => {
 				if (result.user) {
           alert(`${result.user.username} has benn successfully logged in!`);
