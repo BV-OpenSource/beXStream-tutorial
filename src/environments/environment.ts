@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  proxyTarget: 'https://bexstream-preprod.beyond-vision.com',
+  socketIoUrl: 'https://bexstream-preprod.beyond-vision.com',
+  janusUrl: 'wss://bexstream-preprod.beyond-vision.com/janus',
+  coturnUser: 'coturn',
+  coturnPass: 'coturn',
+  coturnUrl: 'turn:213.63.130.233:3478?transport=udp'
 };
 
 /*

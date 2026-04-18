@@ -8,7 +8,7 @@ import { Role } from '../models/role';
 })
 export class RoleService {
 
-  backendUrl = 'https://bexstream.beyond-vision.pt/api/v1';
+  backendUrl = '/api/v1';
 
   getAllUrl = this.backendUrl + '/role/all/filtered';
 

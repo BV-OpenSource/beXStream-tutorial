@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  backendUserUrl = 'https://bexstream.beyond-vision.pt/api/v1/user';
+  backendUserUrl = '/api/v1/user';
 
   constructor(private http: HttpClient) { }
 

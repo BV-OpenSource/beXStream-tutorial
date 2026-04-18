@@ -7,6 +7,7 @@ import { Socket, SocketIoConfig } from 'ngx-socket-io';
 import { WebStorageService } from '../../lib/web-storage.service';
 import { Position } from '../models/position';
 import { MavrosState } from '../models/mavrosState';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,12 @@ import { MavrosState } from '../models/mavrosState';
 export class AssetService {
 
 
-  backendUrl = 'https://bexstream.beyond-vision.pt/api/v1/asset';
+  backendUrl = '/api/v1/asset';
   getAllDronesUrl = this.backendUrl + '/all/drone';
   getConfigUrl = this.backendUrl + '/config';
 
   config: SocketIoConfig = {
-    url: 'https://bexstream.beyond-vision.pt',
+    url: environment.socketIoUrl,
     options: {
       query: {
         source: 'frontend',
@@ -55,7 +56,7 @@ export class AssetService {
 
   public downloadConfig(id: string): Observable<any> {
     return this.http.get<any>(`${this.getConfigUrl}/${id}`);
-}
+  }
 
   public sendSelectedAsset(droneData: any) {
     this.socket.emit('/frontend/selectedAsset', droneData);
@@ -63,19 +64,19 @@ export class AssetService {
 
   public getAssetPos(assetId: string): Observable<Position> {
     return new Observable<Position>(observer => {
-        this.socket.on(assetId + '/position', (data: any) => {
-            observer.next({
-                latitude: data.x,
-                longitude: data.y,
-                altitude: data.a
-            });
+      this.socket.on(assetId + '/position', (data: any) => {
+        observer.next({
+          latitude: data.x,
+          longitude: data.y,
+          altitude: data.a
         });
+      });
     });
   }
 
   // Sends Take off
   public sendDroneTakeoff = (droneData: any) => {
-    console.log('this.socket',this.socket);
+    console.log('this.socket', this.socket);
     this.socket?.emit('/frontend/takeoff', droneData);
   }
 
@@ -94,7 +95,7 @@ export class AssetService {
   // Returns STATE of Drone
   public getDroneState = (droneId: string): Observable<MavrosState> => {
     return new Observable<MavrosState>(observer => {
-        this.socket?.on(droneId + '/State', (data: MavrosState) => observer.next(data));
+      this.socket?.on(droneId + '/State', (data: MavrosState) => observer.next(data));
     });
   }
 

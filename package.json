@@ -1,6 +1,6 @@
 {
   "name": "tutorial-i-login-bexstream",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -45,5 +45,8 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"
+  },
+  "engines": {
+    "node": "10 || 12 || 14"
   }
 }
