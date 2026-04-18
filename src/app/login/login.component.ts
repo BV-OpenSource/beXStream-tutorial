@@ -41,19 +41,24 @@ export class LoginComponent implements OnInit {
 
 
     this.http.post<{ token: string }>('/api/v1/auth/user', this.user)
-      .subscribe((result) => {
-        if (result?.token) {
-          const token = result.token;
-          this.webStorage.storageToken(token);
-          this.http.post<any>(
-            '/api/v1/auth/get/current',
-            null, // no body, just the bearer token
-            { headers: { 'Authorization': `Bearer ${token}` } }
-          ).subscribe((result) => {
-            alert(`${result.username} has benn successfully logged in!`);
-            this.router.navigate([this.defaultURLRoute]);
-          });
-        } else {
+      .subscribe({
+        next: (result) => {
+          if (result?.token) {
+            const token = result.token;
+            this.webStorage.storageToken(token);
+            this.http.post<any>(
+              '/api/v1/auth/get/current',
+              null, // no body, just the bearer token
+              { headers: { 'Authorization': `Bearer ${token}` } }
+            ).subscribe((result) => {
+              alert(`${result.username} has benn successfully logged in!`);
+              this.router.navigate([this.defaultURLRoute]);
+            });
+          } else {
+            alert(`Unexpected response from the server for /api/v1/auth/user. Check the network request/response for details!`);
+          }
+        },
+        error: (err) => {
           alert(`Error on login. Please check the username and the password!.`);
         }
       });
