@@ -1,4 +1,5 @@
 import { ElementRef, Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { ElementRef, Injectable } from '@angular/core';
 export class JanusService {
   // @ts-ignore
   Janus = require('janus-gateway-js');
-  janusPath = 'wss://bexstream.beyond-vision.com/janus';
+  janusPath = environment.janusUrl;
   janusClient: any; // Holds the Janus Client object, used to generate connections
   streaming: any; // Streaming object
   videoElement: ElementRef<HTMLVideoElement> | undefined; // DOM element to retain the stream
@@ -22,10 +23,9 @@ export class JanusService {
       pc: {
         config: {
           iceServers: [{
-            username: 'coturn',
-            credential: 'coturn',
-            urls: ['turn:213.63.138.90:3478?transport=udp',
-            ],
+            username: environment.coturnUser,
+            credential: environment.coturnPass,
+            urls: [environment.coturnUrl],
           }]
         },
         iceTransportPolicy: 'relay',

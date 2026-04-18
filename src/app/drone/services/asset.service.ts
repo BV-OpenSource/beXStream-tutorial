@@ -7,6 +7,7 @@ import { Socket, SocketIoConfig } from 'ngx-socket-io';
 import { WebStorageService } from '../../lib/web-storage.service';
 import { Position } from '../models/position';
 import { MavrosState } from '../models/mavrosState';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AssetService {
   getConfigUrl = this.backendUrl + '/config';
 
   config: SocketIoConfig = {
-    url: 'https://bexstream.beyond-vision.com',
+    url: environment.socketIoUrl,
     options: {
       query: {
         source: 'frontend',
