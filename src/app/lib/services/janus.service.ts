@@ -1,4 +1,4 @@
-import {ElementRef, Injectable} from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +6,7 @@ import {ElementRef, Injectable} from '@angular/core';
 export class JanusService {
   // @ts-ignore
   Janus = require('janus-gateway-js');
-  janusPath = 'wss://bexstream.beyond-vision.pt/janus';
+  janusPath = 'wss://bexstream.beyond-vision.com/janus';
   janusClient: any; // Holds the Janus Client object, used to generate connections
   streaming: any; // Streaming object
   videoElement: ElementRef<HTMLVideoElement> | undefined; // DOM element to retain the stream
@@ -19,15 +19,17 @@ export class JanusService {
     this.janusClient = new this.Janus.Client(this.janusPath, {
       debug: 'all',
       keepalive: 'true',
-      pc: {config: {
+      pc: {
+        config: {
           iceServers: [{
             username: 'coturn',
             credential: 'coturn',
-            urls: [ 'turn:213.63.138.90:3478?transport=udp',
+            urls: ['turn:213.63.138.90:3478?transport=udp',
             ],
           }]
         },
-        iceTransportPolicy: 'relay', },
+        iceTransportPolicy: 'relay',
+      },
     });
   }
 
@@ -90,8 +92,8 @@ export class JanusService {
           });
         });
       }, ((error: any) => {
-          console.log('Error connecting janus', error);
-        }
+        console.log('Error connecting janus', error);
+      }
       ));
     } else {
       if (this.streaming) {
@@ -102,14 +104,14 @@ export class JanusService {
 
   // obtain the stream link, requested by the watch method
   watchJanusStream(streamID: number) {
-      const callback = () => {
-          this.streaming.watch(streamID).then( () => {
-            this.currentWatch = streamID;
-          }).catch((error: any) => {
-            console.log('Janus:error: Attempt to watch', error);
-          });
-      };
-      setTimeout(callback, 50);
+    const callback = () => {
+      this.streaming.watch(streamID).then(() => {
+        this.currentWatch = streamID;
+      }).catch((error: any) => {
+        console.log('Janus:error: Attempt to watch', error);
+      });
+    };
+    setTimeout(callback, 50);
   }
 
 }

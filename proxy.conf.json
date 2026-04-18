@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://bexstream.beyond-vision.pt",
+    "target": "https://bexstream.beyond-vision.com",
     "secure": false,
     "changeOrigin": true
   }
