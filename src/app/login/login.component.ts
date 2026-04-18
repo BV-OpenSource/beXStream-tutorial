@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
               null, // no body, just the bearer token
               { headers: { 'Authorization': `Bearer ${token}` } }
             ).subscribe((result) => {
-              alert(`${result.username} has benn successfully logged in!`);
+              alert(`${result.username} has been successfully logged in!`);
               this.router.navigate([this.defaultURLRoute]);
             });
           } else {
