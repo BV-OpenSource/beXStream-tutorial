@@ -1,6 +1,6 @@
 # Tutorial-I Login beSStream
 
-An example of a web application client of [bexStream](https://bextream.beyond-vision.com)
+An example of a web application client of [bexStream](https://bexstream.beyond-vision.com)
 drone management platform.
 
 This application is a reference implementation of the example given in the
