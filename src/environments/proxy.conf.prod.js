@@ -1,5 +1,5 @@
 // proxy.conf.prod.js
-const defaultTarget = 'https://bexstream-preprod.beyond-vision.com';
+const defaultTarget = 'https://bexstream.beyond-vision.com';
 const target = process.env.PROXY_TARGET || defaultTarget;
 
 const PROXY_CONFIG = {
