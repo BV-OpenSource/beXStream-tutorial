@@ -3,8 +3,6 @@ import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-
-import { User } from './models/user';
 import { WebStorageService } from '../lib/web-storage.service';
 
 @Component({
@@ -14,7 +12,7 @@ import { WebStorageService } from '../lib/web-storage.service';
 })
 export class LoginComponent implements OnInit {
 
-  user: User = new User();
+  user = { username: '', password: '' }; // see body on OpenAPI definition for POST /api/v1/auth/user
 
   loginForm = this.formBuilder.group({
     username: '',
@@ -29,7 +27,8 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.webStorage.removeStoredToken();
+    this.user = { username: '', password: '' };
+    this.webStorage.removeStoredToken(); // implicit logout on init
   }
 
   /**
@@ -44,12 +43,8 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (result) => {
           if (result?.token) {
-            const token = result.token;
-            this.webStorage.storageToken(token);
-            this.http.post<any>('/api/v1/auth/get/current', null).subscribe((result) => {
-              alert(`${result.username} has been successfully logged in!`);
-              this.router.navigate([this.defaultURLRoute]);
-            });
+            this.webStorage.storageToken(result.token as string);
+            alert(`${this.user.username} has been successfully logged in!`);
           } else {
             alert(`Unexpected response from the server for /api/v1/auth/user. Check the network request/response for details!`);
           }
