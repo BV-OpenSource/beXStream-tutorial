@@ -42,9 +42,10 @@ export class LoginComponent implements OnInit {
     this.http.post<{ token: string }>('/api/v1/auth/user', this.user)
       .subscribe({
         next: (result) => {
-          if (result?.token) {
-            this.webStorage.storageToken(result.token as string);
+          if (result.token) {
+            this.webStorage.storageToken(result.token);
             alert(`${this.user.username} has been successfully logged in!`);
+            this.router.navigate([this.defaultURLRoute]);
           } else {
             alert(`Unexpected response from the server for /api/v1/auth/user. Check the network request/response for details!`);
           }
