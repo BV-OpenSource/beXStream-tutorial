@@ -86,6 +86,7 @@ export class UserListComponent implements OnInit {
       .delete(user)
       .subscribe(result => {
         alert(`${user.username} has benn successfully deleted!`);
+        this.listUsers();
       });
   }
 
