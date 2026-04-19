@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.webStorage.removeStoredToken();
   }
 
   /**
@@ -39,18 +40,13 @@ export class LoginComponent implements OnInit {
     this.user.username = loginFormValues.username;
     this.user.password = loginFormValues.password;
 
-
     this.http.post<{ token: string }>('/api/v1/auth/user', this.user)
       .subscribe({
         next: (result) => {
           if (result?.token) {
             const token = result.token;
             this.webStorage.storageToken(token);
-            this.http.post<any>(
-              '/api/v1/auth/get/current',
-              null, // no body, just the bearer token
-              { headers: { 'Authorization': `Bearer ${token}` } }
-            ).subscribe((result) => {
+            this.http.post<any>('/api/v1/auth/get/current', null).subscribe((result) => {
               alert(`${result.username} has been successfully logged in!`);
               this.router.navigate([this.defaultURLRoute]);
             });
